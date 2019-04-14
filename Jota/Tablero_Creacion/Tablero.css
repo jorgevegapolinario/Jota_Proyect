@@ -1,0 +1,104 @@
+#Logo{
+    width: 100px;
+}
+
+#MargenLogo{
+    margin-right: 30%;
+}
+
+#Navegacion li{
+    margin-left: 10px;
+}
+
+#Nav{
+    
+    background-image: url('../Imagenes/Banner.jpg');
+    background-size: cover;
+}
+
+.icononav{
+    width: 35px;
+}
+
+#menudragdrop{
+    background-color: #dddddd;
+    height: 500px;
+    width: 50%;
+}
+
+#tablerocontenedores{
+    width: 50%;
+    background-color: #74b3bc;
+}
+
+.btn-link{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:active{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:visited{
+    color: black;
+    text-decoration: none;
+}
+
+#acordeon{
+    margin-top: 20px;
+}
+
+#ContenedorNuevo{
+    margin-top: 20px;
+}
+
+.inputcontenedor{
+    border:0;
+    background-color:transparent;
+    color: #2d2d2d;
+}
+
+#descripcuerpo{
+    color:#d3d1d1;
+    padding: 30px;
+}
+
+#headercontenedor{
+    background-image: url('../Imagenes/Banner.png');
+}
+
+.iconocontenedor{
+    width: 20px;
+    padding: 3px;
+}
+
+.iconoadd{
+    width: 20px;
+    padding: 3px;
+}
+
+.linkadd:hover, .linkadd:visited, .linkadd:active, .linkadd:link{
+    text-decoration: none;
+    color: #2d2d2d;
+}
+.red{
+    margin-bottom: 10px;
+    background-color: #59c6db;
+}
+
+.vol{
+    margin-bottom: 10px;
+    background-color: #cfac4b;
+}
+
+.iso{
+    margin-bottom: 10px;
+    background-color: #ee73e4;
+}
