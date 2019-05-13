@@ -1,0 +1,66 @@
+#Logo{
+    width: 100px;
+}
+
+#MargenLogo{
+    margin-right: 30%;
+}
+
+#Navegacion li{
+    /* margin-left: 10px; */
+}
+
+#Nav{
+    
+    background-image: url('../Imagenes/Banner.jpg');
+    background-size: cover;
+}
+
+.icononav{
+    width: 35px;
+}
+
+.btn-link{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:active{
+    color: black;
+    text-decoration: none;
+}
+
+.btn-link:visited{
+    color: black;
+    text-decoration: none;
+}
+
+#tabla_volumenes{
+    margin-top: 40px;
+}
+
+.estado_on{
+    width: 20px;
+}
+
+.estado_off{
+    width: 20px;
+}
+
+.terminal{
+    width: 20px;
+    margin-left: 10px;
+}
+
+.botonvol{
+    background-color: #f2a054;
+}
+
+.botonvol:hover{
+    background-color: #d66f1b;
+}

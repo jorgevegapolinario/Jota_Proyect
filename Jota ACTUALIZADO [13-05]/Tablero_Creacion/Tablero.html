@@ -1,0 +1,195 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="Tablero.css">
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico">
+
+    <title>Jota | TABLERO DE CREACIÓN</title>
+  </head>
+  <body>
+    <div class="container-fluid" id="Principal">
+        <nav class="navbar navbar-expand-lg navbar-light" id="Nav">
+            <a class="navbar-brand" href="Tablero.html" id="MargenLogo">
+                <img src="../Imagenes/Logo.png" alt="Logo" id="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navegacion" aria-controls="Navegacion" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="Navegacion">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../Tablero_Creacion/Tablero.html">
+                            <img src="../Imagenes/tablero.png" alt="Logo" class="icononav">
+                            <b>TABLERO</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Contenedores/Contenedores.html">
+                                <img src="../Imagenes/contenedores.png" alt="Logo" class="icononav">
+                            <b>CONTENEDORES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Redes/Redes.html">
+                            <img src="../Imagenes/red.png" alt="Logo" class="icononav">
+                            <b>REDES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Volumenes/Volumenes.html">
+                            <img src="../Imagenes/volumenes.png" alt="Logo" class="icononav">
+                            <b>VOLÚMENES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../ISOS/ISOS.html">
+                            <img src="../Imagenes/iso.png" alt="Logo" class="icononav">
+                            <b>IMÁGENES</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row col-md-12" id="Contenido">
+            <div id="tablerocontenedores" class="col-md-6">
+
+                <div class="card text-center" id="ContenedorNuevo">
+                    <div class="card-header" id="headercontenedor">
+                        <input class="inputcontenedor" type="text" placeholder="Nombre del contenedor...">
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true" id="vaciardatos">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body" id="AddElementos">
+                        <p id="descripcuerpo">Añadir aquí los elementos del contenedor docker +</p>
+                        <hr>
+                        <p id="ipcontenedor">
+                            <b><img src="../Imagenes/llama.png" class="iconocontenedor">IP:</b>
+                            <input class="inputcontenedor" type="text" placeholder="Ip del contenedor...">
+                        </p>
+                        <div class="md-form mb-4">
+                            <textarea id="descripcioncontenedor" class="md-textarea form-control" rows="3" placeholder="Descripción:"></textarea>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success">Crear Contenedor</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="menudragdrop" class="col-md-6">
+
+                    <div id="acordeon">
+
+                        <div class="card">
+                            <div class="card-header" id="HeadRedes">
+                                <h5 class="mb-0 tituloheader">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        REDES
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="HeadRedes" data-parent="#acordeon">
+                                <div class="card-body">
+                                    <button id="draggable" type="button" class="btn btn-md red" data-trigger="focus" data-toggle="popover" title="Red de Prueba" data-content="Descripción & Atributos de la red.">Red de Prueba</button>
+                                    <button type="button" class="btn btn-md red" data-trigger="focus" data-toggle="popover" title="Otra Red" data-content="Descripción & Atributos de la red.">Otra Red</button>
+                                    <button type="button" class="btn btn-md red" data-trigger="focus" data-toggle="popover" title="Host" data-content="Descripción & Atributos de la red.">Host</button>
+                                    <button type="button" class="btn btn-md red" data-trigger="focus" data-toggle="popover" title="None" data-content="Descripción & Atributos de la red.">None</button>
+                                    <button type="button" class="btn btn-md red" data-trigger="focus" data-toggle="popover" title="Bridge" data-content="Descripción & Atributos de la red.">Bridge</button>
+                                    <p><a href="../Redes/Redes.html" class="linkadd"><img src="../Imagenes/mas.png" class="iconoadd"> Añadir Redes...</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="HeadVolumenes">
+                                <h5 class="mb-0 tituloheader">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        VOLÚMENES
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="HeadVolumenes" data-parent="#acordeon">
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-md vol" data-trigger="focus" data-toggle="popover" title="Volúmen Nuevo" data-content="Descripción & Atributos del volumen.">Volúmen Nuevo</button>
+                                    <button type="button" class="btn btn-md vol" data-trigger="focus" data-toggle="popover" title="Volúmen de Prueba" data-content="Descripción & Atributos del volumen.">Volúmen de Prueba</button>
+                                    <button type="button" class="btn btn-md vol" data-trigger="focus" data-toggle="popover" title="Carpeta Compartia" data-content="Descripción & Atributos del volumen.">Carpeta Compartida</button>
+                                    <button type="button" class="btn btn-md vol" data-trigger="focus" data-toggle="popover" title="Almacenamiento" data-content="Descripción & Atributos del volumen.">Almacenamiento</button>
+                                    <button type="button" class="btn btn-md vol" data-trigger="focus" data-toggle="popover" title="Host" data-content="Descripción & Atributos del volumen.">Host</button>                                    
+                                    <p><a href="../Volumenes/Volumenes.html" class="linkadd"><img src="../Imagenes/mas.png" class="iconoadd"> Añadir Volúmenes...</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="HeadImagenes">
+                                <h5 class="mb-0 tituloheader">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        IMÁGENES
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="HeadImagenes" data-parent="#acordeon">
+                                <div class="card-body" id="tableroisos">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+<script>
+        $(function() {
+                //Llamada Ajax
+                $.ajax({
+                    method:  "GET",
+                    dataType: 'json',   
+                    url: "http://localhost:2376/images/json",   
+                    crossDomain: true
+                }).done(function( data ) {
+                        console.log(data);
+
+                        //El elemento principal que se nos devuelve es un vector
+                        //por tanto recorremos el vector
+                        for (i=0;i<data.length;i++){
+                            $("#tableroisos").append(
+                                
+                                "<input type='checkbox' class='checkbox' value=''><b> "+
+                                data[i].RepoTags[0]+
+                                "</b></input><br>"
+                                
+                                );
+                        }                      
+                    });
+
+        });
+    </script>
+
+    <!-- <script>
+        $(".red").draggable();
+        $("#AddElementos").droppable({
+            drop: function(){
+                alert("Añadido Correctamente");
+            }
+        });
+    </script> -->
+    
+
+</body>
+</html>
