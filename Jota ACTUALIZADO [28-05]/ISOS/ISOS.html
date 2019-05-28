@@ -1,0 +1,286 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="ISOS.css">
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>Jota | IMÁGENES</title>
+  </head>
+  <body>
+    <div class="container-fluid" id="Principal">
+        <nav class="navbar navbar-expand-lg navbar-light" id="Nav">
+            <a class="navbar-brand" href="../Tablero_Creacion/Tablero.html" id="MargenLogo">
+                <img src="../Imagenes/Logo.png" alt="Logo" id="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navegacion" aria-controls="Navegacion" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="Navegacion">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Tablero_Creacion/Tablero.html">
+                            <img src="../Imagenes/tablero.png" alt="Logo" class="icononav">
+                            <b>TABLERO</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Contenedores/Contenedores.html">
+                                <img src="../Imagenes/contenedores.png" alt="Logo" class="icononav">
+                            <b>CONTENEDORES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Redes/Redes.html">
+                            <img src="../Imagenes/red.png" alt="Logo" class="icononav">
+                            <b>REDES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Volumenes/Volumenes.html">
+                            <img src="../Imagenes/volumenes.png" alt="Logo" class="icononav">
+                            <b>VOLÚMENES</b>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../ISOS/ISOS.html">
+                            <img src="../Imagenes/iso.png" alt="Logo" class="icononav">
+                            <b>IMÁGENES</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row col-md-12" id="Contenido">
+                <div id="tableroisos" class="col-md-6">
+    
+                    <div class="card text-center" id="ContenedorNuevo">
+                        <div class="card-header" id="headercontenedor">
+                            <h5>LISTA DE IMÁGENES
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true"><img src="../Imagenes/recargar.png" id="Recargar"></span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="card-body" id="Listado">
+                            <p class="iso"><img src="../Imagenes/llama.png" class="iconocontenedor">Debajo encontrarás las imágenes que se encuentran en tu equipo<img src="../Imagenes/llama.png" class="iconocontenedor"></p>
+                            <hr>
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="busqueda" class="col-md-6">
+
+                    <div id="inputbusqueda">
+                        <input class="transparente" type="text" id="palabrabuscada" placeholder="Busca en DockerHub...">
+                        <a href="#" class="iconobuscar"><img id="buscarisoDH" src="../Imagenes/iconobuscar.png" alt=""></a>
+                    </div>
+
+                    <div class="card text-center" id="ContenedorNuevo">
+                        <div class="card-header" id="headercontenedor">
+                            <h7>COINCIDENCIAS ENCONTRADAS</h7>
+                        </div>
+                        <div class="card-body" id="Listadocoincidencias">
+                            <p class="iso"><img src="../Imagenes/coincide.png" class="iconocontenedor">Debajo encontrarás las imágenes que coincidan con tu búsqueda<img src="../Imagenes/coincide.png" class="iconocontenedor"></p>
+                            <hr>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div id="cargando">
+
+                </div>
+        </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+    <!-- <script>
+        $(".red").draggable();
+        $("#AddElementos").droppable({
+            drop: function(){
+                alert("Añadido Correctamente");
+            }
+        });
+    </script> -->
+    
+    <script>
+
+            /* BOTON EDITAR CONTENEDOR */
+        
+            $(".editarcontenedor").click(function(){
+                $("#modaleditar").modal("show");
+            });
+    </script>
+
+    <script>
+
+    	// LISTAMOS LAS IMÁGENES (ISOS) QUE HAY EN EL PC LOCAL
+
+        $(function() {
+            
+            var nombresImagenes = [];
+            
+            //Capturamos el evento de click
+            $("#Recargar").click(function() {
+            	
+            	nombresImagenes = [];
+
+                //Llamada AJAX
+                $.ajax({
+                    method:  "GET",
+                    dataType: 'json',   
+                    url: "http://localhost:2376/images/json",   
+                    crossDomain: true
+                }).done(function( data ) {
+                        //console.log(data);
+
+                        $("#Listado").html("");
+                        
+                        for (i=0;i<data.length;i++){
+
+                        	var IdImagen = data[i].Id.slice(data[i].Id.length-8,);
+                            var NombreImagen = data[i].RepoTags[0];
+
+                            $("#Listado").append(
+                                                                
+                                "<p><img src='../Imagenes/llama.png' class='iconocontenedor'>"+
+                                                               
+                                "<span>"+IdImagen+" » </span>"+
+                                
+                                "<span class='nameImage'>"+NombreImagen+"</span>"+
+                                "<span><img class='imgborrar' data-borrar='"+NombreImagen+"' src='../Imagenes/x.png' /></span>"+
+                                "</p><hr>"
+                            );
+
+                            nombresImagenes.push(NombreImagen);
+                        }
+                        //Vaciamos data y vemos si el array tiene los nombres añadidos
+                        data[i]=[];
+                        console.log(nombresImagenes);                      
+                    });
+            });
+
+
+            // BÚSQUEDA DE ISOS POR PALABRAS EN DOCKERHUB ----------------------- //
+
+            $(document).on("click","#buscarisoDH", function(){
+
+            var palabra = $("#palabrabuscada").val();
+
+            $(function() {
+            $.ajax({                           
+            method:  "GET",
+            headers: {'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Headers':'Origin,Content-Type,Accept',
+            'Access-Control-Allow-Methods':'POST,GET,OPTIONS,PUT,DELETE'},
+                dataType: 'json',   
+                url: "http://localhost:2376/images/search?term="+palabra+"",   
+                crossDomain: true,
+
+            }).done(function( data ) {
+                console.log(data);
+               
+                $("#Listadocoincidencias").html("");
+
+                for (i=0;i<data.length;i++){
+
+                    var IdImagen = data[i].star_count;
+                    var NombreImagen = data[i].name;
+
+                    $("#Listadocoincidencias").append(
+                                                        
+                        "<p><img src='../Imagenes/coincide.png' class='iconocontenedor'>"+
+                                                    
+                        "<span>"+ IdImagen +" » </span>"+
+                        
+                        "<span class='NomnreImagen'>"+ NombreImagen +"</span>"+
+                        "<span><img class='descargaimg' src='../Imagenes/descargaiso.png' data-descargar='"+NombreImagen+"' /></span>"+
+                        "</p><hr>"
+                    );
+
+                    nombresImagenes.push(NombreImagen);
+                }
+
+                //Vaciamos data y vemos si el array tiene los nombres añadidos
+                data[i]=[];
+                console.log(nombresImagenes); 
+
+            });
+            });
+
+            });
+
+
+            // BORRAR ISO ------------------------------------------------------------------------ >> - << //
+
+            $(document).on("click",".imgborrar", function(){
+
+                var nombreiso = $(this).attr("data-borrar");
+                console.log("click >> "+nombreiso);
+
+                $(function() {
+                $.ajax({                           
+                method:  "DELETE",
+                contentType: 'application/json',
+                    dataType: 'json',
+                    url: "http://localhost:2376/images/name="+nombreiso+"?force=true",   
+                    data: JSON.stringify({"name" : nombreiso}), 
+                    crossDomain: true,
+
+                }).done(function( data ) {
+                    console.log(data);
+                    window.location = "../ISOS/ISOS.html";
+
+                });
+                });
+
+            });
+
+
+            // DESCARGAR LA ISO (PULL) -------------------------------------------------- >> - << //
+
+            $(document).on("click",".descargaimg", function(){
+
+                var nombreiso = $(this).attr("data-descargar");
+                console.log("click >> "+nombreiso);
+
+                $("#cargando").append("Descargando la ISO >> "+nombreiso+"");
+
+                $(function() {
+                $.ajax({                           
+                method:  "POST",
+                contentType: 'application/json',
+                    dataType: 'json',
+                    url: "http://localhost:2376/images/create?fromImage="+nombreiso+"",   
+                    data: JSON.stringify({"fromImage" : nombreiso}), 
+                    crossDomain: true,
+
+                }).done(function( data ) {
+                    console.log(data);
+                    window.location = "../ISOS/ISOS.html";
+
+                });
+                });
+
+            });
+
+
+        });
+
+    </script>
+
+</body>
+</html>
