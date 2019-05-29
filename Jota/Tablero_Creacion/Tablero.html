@@ -62,7 +62,7 @@
 
                 <div class="card text-center" id="ContenedorNuevo">
                     <div class="card-header" id="headercontenedor">
-                        <input class="inputcontenedor" type="text" placeholder="Nombre del contenedor...">
+                        <input id="nombrecontseleccionado" class="inputcontenedor" type="text" placeholder="Nombre del contenedor...">
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true" id="vaciardatos">&times;</span>
                         </button>
@@ -72,20 +72,24 @@
                         <div id="pintarred">
 
                         </div>
+                        <div id="pintarvol">
+
+                        </div>
                         <div id="pintariso">
 
                         </div>
                         <hr>
-                        <p id="ipcontenedor">
-                            <b><img src="../Imagenes/llama.png" class="iconocontenedor">IP:</b>
-                            <input class="inputcontenedor" type="text" placeholder="Ip del contenedor...">
+                        <p id="puertoscontenedor">
+                            <b><img src="../Imagenes/llama.png" class="iconocontenedor">PUERTOS:</b>
+                            <input id="puertounocontenedorseleccionado" class="puerto" type="text" placeholder=" 23"><sub> ♦ CONTENEDOR</sub>  | 
+                            <input id="puertodoscontenedorseleccionado" class="puerto" type="text" placeholder=" 80"><sub> ♦ LOCAL</sub>
                         </p>
                         <div class="md-form mb-4">
                             <textarea id="descripcioncontenedor" class="md-textarea form-control" rows="3" placeholder="Descripción:"></textarea>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success">Crear Contenedor</a>
+                        <a href="#" class="btn btn-success" id="crearcont">Crear Contenedor</a>
                     </div>
                 </div><br>
 
@@ -165,6 +169,7 @@
             $("#descripcuerpo").html("Añadir aquí los elementos del contenedor docker +");
             $("#pintarred").html("");
             $("#pintariso").html("");
+            $("#pintarvol").html("");
             $(".inputcontenedor").val("");
             $("#descripcioncontenedor").val("");
             console.log("vasiaoh");
@@ -187,7 +192,7 @@
 
             $("#descripcuerpo").html("<p>▼ Abajo se añadirán los nuevos detalles del contenedor ▼<hr></p>");
             $("#pintariso").html("");
-            $("#pintariso").append("<br><span><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>ISO:</b> "+nombreiso+"</span>");
+            $("#pintariso").append("<br><span class='isoseleccionada'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>ISO:</b> "+nombreiso+"</span>");
 
         });
 
@@ -201,7 +206,7 @@
                 console.log("click >> "+nombrered);
 
                 $("#descripcuerpo").html("<p>▼ Abajo se añadirán los nuevos detalles del contenedor ▼<hr></p>");
-                $("#pintarred").append("<span><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>RED:</b> "+nombrered+"</span><br>");
+                $("#pintarred").append("<br><span class='redseleccionada'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>RED:</b> "+nombrered+"</span><br>");
 
             } else if($(this).prop('disabled', true)){
 
@@ -211,6 +216,97 @@
 
 
         });
+
+        // Coger el volumen seleccionado.
+        $(document).on("click",".volpc", function(){
+
+
+            if($(this).prop('checked')){
+
+                var nombrevol = $(this).attr("value");
+                console.log("click >> "+nombrevol);
+
+                $("#descripcuerpo").html("<p>▼ Abajo se añadirán los nuevos detalles del contenedor ▼<hr></p>");
+                $("#pintarvol").append("<br><span class='volseleccionado'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>VOLUMEN:</b> "+nombrevol+"</span><br>");
+
+            } else if($(this).prop('disabled', true)){
+
+                $(this).prop('disabled', false);
+
+            }
+
+
+        });
+
+
+
+        // CREAR EL CONTENEDOR AL DARLE AL BOTÓN.
+        $(document).on("click","#crearcont", function(){
+
+
+            if(($("#nombrecontseleccionado").val() !== "") && ($("#ipcontenedorseleccionada").val() !== "") && ($("#descripcioncontenedor").val() !== "") ){
+
+
+                var Nombre = $("nombrecontseleccionado").val();
+
+                var IP = $("ipcontenedorseleccionada").val();
+
+                var Descripcion = $("descripcioncontenedor").val();
+
+                var PuertoContenedor = $("puertounocontenedorseleccionado").val();
+
+                var PuertoLocal = $("puertodoscontenedorseleccionado").val();
+
+                $(function() {
+
+                    $.ajax({                           
+                    method:  "POST",
+                        dataType: 'json',   
+                        url: "http://localhost:2376/containers/create",   
+                        crossDomain: true,
+
+                    }).done(function( data ) {
+                            console.log(data);
+                            
+                            //El elemento principal que se nos devuelve es un vector
+                            //por tanto lo recorro 
+
+                                for (i=0;i<data.Volumes.length;i++){
+
+                                    elemento = data.Volumes[i];
+                                    console.log(elemento);
+
+                                    var MountPoint = elemento.Mountpoint.slice(elemento.Mountpoint.length-20,);
+                                    var Nombre = elemento.Name.slice(elemento.Name.length-30,);
+
+                                    $("#tablerovolumenes").append(
+                                    
+                                    "<input type='checkbox' class='checkbox volpc' value='"+Nombre+"'><b> "+Nombre+
+                                    "</b></input><br>"
+                                    
+                                    );
+                                }           
+                                
+                                $("#tablerovolumenes").append("<p><a href='../Volumenes/Volumenes.html' class='linkadd'>"+
+                                "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Volúmenes...</a></p>");
+
+                        });
+
+                });
+
+                $("#descripcuerpo").html("<p>▼ Abajo se añadirán los nuevos detalles del contenedor ▼<hr></p>");
+                $("#pintarvol").append("<br><span class='volseleccionado'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>VOLUMEN:</b> "+nombrevol+"</span><br>");
+
+            } else{
+
+                
+
+            }
+
+
+        });
+
+
 
 
 
@@ -311,7 +407,7 @@
 
                                 $("#tablerovolumenes").append(
                                 
-                                "<input type='checkbox' class='checkbox' value=''><b> "+Nombre+
+                                "<input type='checkbox' class='checkbox volpc' value='"+Nombre+"'><b> "+Nombre+
                                 "</b></input><br>"
                                 
                                 );
@@ -322,7 +418,7 @@
 
                     });
 
-            });
+        });
 
 
 

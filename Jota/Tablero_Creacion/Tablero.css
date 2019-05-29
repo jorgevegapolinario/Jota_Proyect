@@ -112,3 +112,11 @@
 .checkbox{
     margin-bottom: 15px;
 }
+
+.puerto{
+    width: 30px;
+    border:0;
+    background-color:#EEEDED;
+    border-radius: 5px;
+    color: #2d2d2d;
+}
