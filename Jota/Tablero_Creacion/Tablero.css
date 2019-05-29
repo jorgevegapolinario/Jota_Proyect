@@ -7,7 +7,13 @@
 }
 
 #Navegacion li{
-    margin-left: 10px;
+    /* margin-left: 10px; */
+}
+
+@media screen and (min-width: 400px) {
+    #Navegacion li{
+        /* margin-left: 10px; */
+    }
 }
 
 #Nav{
@@ -21,14 +27,14 @@
 }
 
 #menudragdrop{
-    background-color: #dddddd;
+    background-color:white;
     height: 500px;
     width: 50%;
 }
 
 #tablerocontenedores{
     width: 50%;
-    background-color: #74b3bc;
+    background-color: white;
 }
 
 .btn-link{
@@ -101,4 +107,8 @@
 .iso{
     margin-bottom: 10px;
     background-color: #ee73e4;
+}
+
+.checkbox{
+    margin-bottom: 15px;
 }
