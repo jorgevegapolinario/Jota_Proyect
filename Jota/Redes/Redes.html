@@ -173,7 +173,8 @@
                                     "<li><img src='../Imagenes/coincide.png' class='iconodetalle'>"+
                                     "<b> IPV6: </b>"+data.EnableIPv6+"</li><br>"+
 
-                                "</ul>"
+                                "</ul>"+
+                                ""+data.IPAM.Config.IpRange+""
 
                             );
 
@@ -195,6 +196,7 @@
 
                     $("#formred").html("<form action='Redes.html' method='POST'><fieldset><legend>Crea tu Nueva Red:</legend>"+
                     "<label>Nombre: <span class='naranja'>*</span></label><input class='form-control' id='nombrerednueva' placeholder='Nombre de la nueva red...' required></input><br>"+
+                    "<label>IP: <span class='naranja'>*</span></label><input class='form-control' id='iprednueva' placeholder='Ip de la nueva red...' required></input><br>"+
                     "<label>Driver: <span class='naranja'>*</span></label><select class='form-control' id='driverrednueva' required>"+
                     //"<option value='host'>Host</option>"+
                     "<option value='bridge'>Bridge</option>"+
@@ -207,22 +209,23 @@
 
                         var nombrenuevo = $("#nombrerednueva").val();
                         var drivernuevo = $("#driverrednueva").val();
+                        var ipnueva = $("#iprednueva").val();
 
-                        console.log("click >> "+nombrenuevo+","+drivernuevo);
+                        console.log("click >> "+nombrenuevo+","+drivernuevo+","+ipnueva);
 
                         $(function() {
                         $.ajax({                           
                         method:  "POST",
                         contentType: 'application/json',
                             dataType: 'json',   
-                            url: "http://localhost:2376/networks/create?Name="+nombrenuevo+"&Driver="+drivernuevo,
-                            data: JSON.stringify({"Name" : nombrenuevo,"Driver" : drivernuevo}),   
+                            url: "http://localhost:2376/networks/create?Name="+nombrenuevo+"&Driver="+drivernuevo+"&IpRange="+ipnueva,
+                            data: JSON.stringify({"Name" : nombrenuevo,"Driver" : drivernuevo,"IpRange" : ipnueva}),   
                             crossDomain: true,
 
                         }).done(function( data ) {
                             console.log(data);
                             console.log("yeskaaaaaaaaa");
-                            window.location = "../Redes/Redes.html";
+                            /*window.location = "../Redes/Redes.html";*/
 
                         });
                         });
