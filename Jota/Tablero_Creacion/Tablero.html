@@ -232,19 +232,60 @@
                 console.log(ISO);
 
                 var PuertoContenedor = $("#puertounocontenedorseleccionado").val();
+                console.log("LOCAL"+PuertoContenedor);
 
                 var PuertoLocal = $("#puertodoscontenedorseleccionado").val();
+                console.log("LOCAL"+PuertoLocal);
+
+
+                var vare = "{"+
+                            "'name' : '"+Nombre+"',"+
+                            "'Image' : '"+ISO+"',"+
+                            "'Hostconfig' : {"+
+                            "'PortBindings' : {'"+
+                            PuertoLocal+"' : ["+
+                            "{"+
+                            "'HostIp' : '',"+
+                            "'HostPort' : '"+PuertoContenedor+"'"+
+                            "}]}"+
+                        "}";
+
+                var si = "http://localhost:2376/containers/create?name="+Nombre+"";
+                console.log("TODO TODITO TODO >> "+vare);
+                console.log("MA COZA >>"+si)
 
                 $(function() {
 
                     $.ajax({                           
                     method:  "POST",
-                        dataType: 'json',   
-                        url: "http://localhost:2376/containers/create/?name="+Nombre+"&Image="+ISO+"", 
-                        data: JSON.stringify(
-                        {"name" : Nombre,
-                         "Image": ISO 
-                        }),  
+                        dataType: 'json',
+                        contentType: "application/json",   
+                        url: "http://localhost:2376/containers/create?name="+Nombre+"", 
+                        data: "{"+
+                            /*"'name' : '"+Nombre+"',"+*/
+                            "'Image' : '"+ISO+"',"+
+                            "'Hostconfig' : {"+
+                            "'PortBindings' : {'"+
+                            PuertoLocal+"' : ["+
+                            "{"+
+                            "'HostIp' : '',"+
+                            "'HostPort' : '"+PuertoContenedor+"'"+
+                            "}]}"+
+                        "}",
+                        /*data: JSON.stringify(
+                        { "name" : Nombre,
+                          "Image": ISO,
+                          "HostConfig": {
+                            "PortBindings": {
+                                "PuertoLocal" : [
+                                    {
+                                    "HostIp" : "",
+                                    "HostPort": "PuertoContenedor"
+                                    }
+                                ]
+                                }
+                            }
+                        }),*/  
                         crossDomain: true,
 
                     }).done(function( data ) {
