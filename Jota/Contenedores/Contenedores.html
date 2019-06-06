@@ -131,9 +131,9 @@
                                 "class='estadocont' data-estado='apagado' data='"+elemento.Id+"'></a>";
                             }
 
-                            /* for (i=0;i<puertos.length;i++) {
-                                var puertoprivado = elemento.Ports.PrivatePort;
-                                var puertopublico = elemento.Ports.PublicPort;
+                            /*for (i=0;i<puertos.length;i++) {
+                                var puertoprivado = elemento.Ports[i].PrivatePort;
+                                var puertopublico = elemento.Ports[i].PublicPort;
                             }*/
 
                             $("tbody").append(
@@ -150,6 +150,8 @@
                                 "<tr>"
                             );
                         }                      
+                    }).fail(function( data ){
+                    $("tbody").html("<p>No ha sido posible mostrar los contenedores, algo ha salido mal.</p>");
                     });
 
 
@@ -200,7 +202,9 @@
 
                     );
 
-            });
+            }).fail(function( data ){
+                    $("#listadetalles").html("<p>No ha sido posible mostrar los detalles del contenedor.</p>");
+                    });
             });
 
         });
@@ -227,7 +231,9 @@
                 console.log(data);
                 window.location = "../Contenedores/Contenedores.html";
 
-            });
+            }).fail(function( data ){
+                    $("#listadetalles").html("<p>No ha sido posible borrar el contenedor seleccionado.</p>");
+                    });
             });
 
         });
@@ -260,6 +266,8 @@
                         
                         window.location = "../Contenedores/Contenedores.html";
 
+                    }).fail(function( data ){
+                    $("tbody").html("<p>No ha sido posible apagar el contenedor.</p>");
                     });
                 });
 
@@ -281,6 +289,8 @@
                         
                         window.location = "../Contenedores/Contenedores.html";
 
+                    }).fail(function( data ){
+                    $("tbody").html("<p>No ha sido posible encender el contenedor.</p>");
                     });
                 });
 

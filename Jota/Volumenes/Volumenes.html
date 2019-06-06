@@ -147,6 +147,8 @@
                                     "</tr>"
                                 );
                             }           
+                    }).fail(function( data ){
+                    $("tbody").html("<p>No hay volúmenes disponibles.</p>");
                     });
 
             });
@@ -178,20 +180,26 @@
                     console.log("click >> "+nombrenuevo+","+drivernuevo);
 
                     $(function() {
-                    $.ajax({                           
-                    method:  "POST",
-                    contentType: 'application/json',
-                        dataType: 'json',   
-                        url: "http://localhost:2376/volumes/create?Name="+nombrenuevo+"&Driver="+drivernuevo,
-                        data: JSON.stringify({"Name" : nombrenuevo,"Driver" : drivernuevo}),   
-                        crossDomain: true,
 
-                    }).done(function( data ) {
-                        console.log(data);
-                        console.log("Sa creao bien.");
-                        window.location = "../Volumenes/Volumenes.html";
+                        $.ajax({                           
+                        method:  "POST",
+                        contentType: 'application/json',
+                            dataType: 'json',   
+                            url: "http://localhost:2376/volumes/create?Name="+nombrenuevo+"&Driver="+drivernuevo,
+                            data: JSON.stringify({"Name" : nombrenuevo,"Driver" : drivernuevo}),   
+                            crossDomain: true,
 
-                    });
+                        }).done(function( data ) {
+                            console.log(data);
+                            console.log("Sa creao bien.");
+                            window.location = "../Volumenes/Volumenes.html";
+
+                        }).fail(function( data ){
+                        
+                        $("tbody").html("<p>Algo ha salido mal. No ha sido posible la creación del volumen.</p>");
+                        
+                        });
+
                     });
 
                 });
@@ -240,7 +248,9 @@
 
                         );
 
-                });
+                }).fail(function( data ){
+                    $("tbody").html("<p>No ha sido posible mostrar los detalles del volumen.</p>");
+                    });
                 });
 
             });
@@ -267,7 +277,9 @@
                     console.log(data);
                     window.location = "../Volumenes/Volumenes.html";
 
-                });
+                }).fail(function( data ){
+                    $("tbody").html("<p>No ha sido posible llevar a cabo la eliminación del volumen.</p>");
+                    });
                 });
 
             });

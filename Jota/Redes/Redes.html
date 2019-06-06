@@ -129,6 +129,8 @@
                                 "<tr>"
                             );
                         }                      
+                    }).fail(function( data ){
+                    $("tbody").html("<p>No hay redes disponibles.</p>");
                     });
 
 
@@ -173,11 +175,12 @@
                                     "<li><img src='../Imagenes/coincide.png' class='iconodetalle'>"+
                                     "<b> IPV6: </b>"+data.EnableIPv6+"</li><br>"+
 
-                                "</ul>"+
-                                ""+data.IPAM.Config.IpRange+""
+                                "</ul>"
 
                             );
 
+                    }).fail(function( data ){
+                    $("#listadetalles").html("<p>No ha sido posible mostrar los detalles de la red.</p>");
                     });
                     });
 
@@ -196,7 +199,7 @@
 
                     $("#formred").html("<form action='Redes.html' method='POST'><fieldset><legend>Crea tu Nueva Red:</legend>"+
                     "<label>Nombre: <span class='naranja'>*</span></label><input class='form-control' id='nombrerednueva' placeholder='Nombre de la nueva red...' required></input><br>"+
-                    "<label>IP: <span class='naranja'>*</span></label><input class='form-control' id='iprednueva' placeholder='Ip de la nueva red...' required></input><br>"+
+                    /*"<label>IP: <span class='naranja'>*</span></label><input class='form-control' id='iprednueva' placeholder='Ip de la nueva red...' required></input><br>"+*/
                     "<label>Driver: <span class='naranja'>*</span></label><select class='form-control' id='driverrednueva' required>"+
                     //"<option value='host'>Host</option>"+
                     "<option value='bridge'>Bridge</option>"+
@@ -225,9 +228,11 @@
                         }).done(function( data ) {
                             console.log(data);
                             console.log("yeskaaaaaaaaa");
-                            /*window.location = "../Redes/Redes.html";*/
+                            window.location = "../Redes/Redes.html";
 
-                        });
+                        }).fail(function( data ){
+                            $("tbody").html("<p>Algo ha salido mal. No ha sido posible crear la red.</p>");
+                            });
                         });
 
                     });
@@ -256,7 +261,9 @@
                         console.log(data);
                         window.location = "../Redes/Redes.html";
 
-                    });
+                    }).fail(function( data ){
+                            $("#listadetalles").html("<p>No se ha podido borrar la red seleccionada.</p>");
+                        });
                     });
 
                 });

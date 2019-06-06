@@ -170,6 +170,10 @@
                         //Vaciamos data y vemos si el array tiene los nombres añadidos
                         data[i]=[];
                         console.log(nombresImagenes);                      
+                    }).fail(function( data ){
+
+                        $("#Listado").append("<p>No ha sido posible mostrar las imágenes disponibles en el equipo.</p>");
+
                     });
             });
 
@@ -195,31 +199,35 @@
                
                 $("#Listadocoincidencias").html("");
 
-                for (i=0;i<data.length;i++){
+                    for (i=0;i<data.length;i++){
 
-                    var IdImagen = data[i].star_count;
-                    var NombreImagen = data[i].name;
+                        var IdImagen = data[i].star_count;
+                        var NombreImagen = data[i].name;
 
-                    $("#Listadocoincidencias").append(
+                        $("#Listadocoincidencias").append(
+                                                            
+                            "<p><img src='../Imagenes/coincide.png' class='iconocontenedor'>"+
                                                         
-                        "<p><img src='../Imagenes/coincide.png' class='iconocontenedor'>"+
-                                                    
-                        "<span>"+ IdImagen +" » </span>"+
-                        
-                        "<span class='NomnreImagen'>"+ NombreImagen +"</span>"+
-                        "<span><img class='descargaimg' src='../Imagenes/descargaiso.png' data-descargar='"+NombreImagen+"' /></span>"+
-                        "</p><hr>"
-                    );
+                            "<span>"+ IdImagen +" » </span>"+
+                            
+                            "<span class='NomnreImagen'>"+ NombreImagen +"</span>"+
+                            "<span><img class='descargaimg' src='../Imagenes/descargaiso.png' data-descargar='"+NombreImagen+"' /></span>"+
+                            "</p><hr>"
+                        );
 
-                    nombresImagenes.push(NombreImagen);
-                }
+                        nombresImagenes.push(NombreImagen);
+                    }
 
-                //Vaciamos data y vemos si el array tiene los nombres añadidos
-                data[i]=[];
-                console.log(nombresImagenes); 
+                    //Vaciamos data y vemos si el array tiene los nombres añadidos
+                    data[i]=[];
+                    console.log(nombresImagenes); 
 
-            });
-            });
+                }).fail(function( data ){
+                    $("#Listadocoincidencias").html("<p style='color: gray;'><img src='../Imagenes/coincide.png' class='iconocontenedor'>Debajo encontrarás las imágenes que coincidan con tu búsqueda<img src='../Imagenes/coincide.png' class='iconocontenedor'></p>"+
+                    "<hr><p><i>No ha sido posible mostrar las imágenes que coinciden.<br> Asegúrate de tener activado el plugin <b>CORS</b>.</i></p>");
+
+                    });;
+                });
 
             });
 
@@ -247,6 +255,8 @@
                     console.log(data);
                     window.location = "../ISOS/ISOS.html";
 
+                }).fail(function( data ){
+                    $("#Listado").html("<p>No ha sido posible la eliminación de la imagen.</p>");
                 });
                
 
@@ -279,6 +289,8 @@
                     console.log(data);
                     window.location = "../ISOS/ISOS.html";
 
+                }).fail(function( data ){
+                    $("#Listadocoincidencias").html("<p>No se ha podido descargar la imagen seleccionada.</p>");
                 });
                 
 

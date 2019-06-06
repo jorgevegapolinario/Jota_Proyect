@@ -167,6 +167,8 @@
             $("#pintarred").html("");
             $("#pintariso").html("");
             $("#pintarvol").html("");
+            $("#puertounocontenedorseleccionado").val("");
+            $("#puertodoscontenedorseleccionado").val("");
             $(".inputcontenedor").val("");
             $("#descripcioncontenedor").val("");
             console.log("vasiaoh");
@@ -201,7 +203,7 @@
 
                 $("#pintarred").html("");
                 $("#descripcuerpo").html("<p>▼ Abajo se añadirán los nuevos detalles del contenedor ▼<hr></p>");
-                $("#pintarred").append("<br><span class='redseleccionada'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>RED:</b> "+nombrered+"</span><br>");
+                $("#pintarred").append("<br><span class='redseleccionada' data='"+nombrered+"'><img src='../Imagenes/llama.png' class='iconocontenedor' /><b>RED:</b> "+nombrered+"</span><br>");
 
         });
 
@@ -231,28 +233,14 @@
                 var ISO = $(".isoseleccionada").attr("data");
                 console.log(ISO);
 
+                var Red = $(".redseleccionada").attr("data");
+                console.log(Red);
+
                 var PuertoContenedor = $("#puertounocontenedorseleccionado").val();
                 console.log("LOCAL"+PuertoContenedor);
 
                 var PuertoLocal = $("#puertodoscontenedorseleccionado").val();
                 console.log("LOCAL"+PuertoLocal);
-
-
-                var vare = "{"+
-                            "'name' : '"+Nombre+"',"+
-                            "'Image' : '"+ISO+"',"+
-                            "'Hostconfig' : {"+
-                            "'PortBindings' : {'"+
-                            PuertoLocal+"' : ["+
-                            "{"+
-                            "'HostIp' : '',"+
-                            "'HostPort' : '"+PuertoContenedor+"'"+
-                            "}]}"+
-                        "}";
-
-                var si = "http://localhost:2376/containers/create?name="+Nombre+"";
-                console.log("TODO TODITO TODO >> "+vare);
-                console.log("MA COZA >>"+si)
 
                 $(function() {
 
@@ -261,39 +249,59 @@
                         dataType: 'json',
                         contentType: "application/json",   
                         url: "http://localhost:2376/containers/create?name="+Nombre+"", 
-                        data: "{"+
-                            /*"'name' : '"+Nombre+"',"+*/
-                            "'Image' : '"+ISO+"',"+
-                            "'Hostconfig' : {"+
-                            "'PortBindings' : {'"+
-                            PuertoLocal+"' : ["+
-                            "{"+
-                            "'HostIp' : '',"+
-                            "'HostPort' : '"+PuertoContenedor+"'"+
-                            "}]}"+
-                        "}",
-                        /*data: JSON.stringify(
+                        data: JSON.stringify(
                         { "name" : Nombre,
                           "Image": ISO,
                           "HostConfig": {
                             "PortBindings": {
-                                "PuertoLocal" : [
+                                [PuertoContenedor] : [
                                     {
-                                    "HostIp" : "",
-                                    "HostPort": "PuertoContenedor"
+                                    "HostIp" : "0.0.0.0",
+                                    "HostPort": PuertoLocal
                                     }
                                 ]
                                 }
                             }
-                        }),*/  
+                        }),
                         crossDomain: true,
 
                     }).done(function( data ) {
                             console.log(data);   
                                 
-                            $("#pintarvol").append("HA FUNSIONAOOOOOO");
+                            $("#descripcuerpo").html("SE HA CREADO CORRECTAMENTE EL CONTENEDOR.");
+                            $("#pintarred").html("");
+                            $("#pintariso").html("");
+                            $("#pintarvol").html("");
+                            $(".inputcontenedor").val("");
+                            $("#descripcioncontenedor").val("");
 
-                        });
+                    });
+
+                });
+
+
+                $(function(){
+
+                    $.ajax({                           
+                    method:  "POST",
+                        dataType: 'json',
+                        contentType: "application/json",   
+                        url: "http://localhost:2376/networks/"+Red+"/connect", 
+                        data: JSON.stringify(
+                        {   "Container": Nombre,
+                            "EndpointConfig": {
+                                "IPAMConfig": {}
+                            }
+
+                        }),
+                        crossDomain: true,
+
+                    }).done(function( data ) {
+                            console.log(data);   
+                                
+                            $("#descripcuerpo").append("SE HA CREADO CORRECTAMENTE LA RED.");
+
+                    });
 
                 });
 
@@ -346,7 +354,11 @@
                         $("#tableroisos").append("<p><a href='../ISOS/ISOS.html' class='linkadd'>"+
                         "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Imágenes...</a></p>");
 
-                    });
+                    }).fail(function( data ){
+                    $("#tableroisos").html("<p>No ha sido posible listar las imágenes.</p>"+
+                    "<p><a href='../ISOS/ISOS.html' class='linkadd'>"+
+                    "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Imágenes...</a></p>");
+                });
 
         });
 
@@ -376,7 +388,11 @@
                         
                         $("#tableroredes").append("<p><a href='../Redes/Redes.html' class='linkadd'>"+
                         "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Redes...</a></p>");                 
-                    });
+                    }).fail(function( data ){
+                    $("#tableroisos").html("<p>No ha sido posible listar las redes.</p>"+
+                    "<p><a href='../Redes/Redes.html' class='linkadd'>"+
+                    "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Redes...</a></p>");
+                });
 
         });
 
@@ -416,7 +432,11 @@
                             $("#tablerovolumenes").append("<p><a href='../Volumenes/Volumenes.html' class='linkadd'>"+
                             "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Volúmenes...</a></p>");
 
-                    });
+                    }).fail(function( data ){
+                    $("#tableroisos").html("<p>No ha sido posible listar los volúmenes.</p>"+
+                    "<p><a href='../Volumenes/Volumenes.html' class='linkadd'>"+
+                    "<img src='../Imagenes/mas.png' class='iconoadd'> Añadir Volúmenes...</a></p>");
+                });
 
         });
 
