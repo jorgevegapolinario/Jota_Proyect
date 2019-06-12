@@ -1,4 +1,0 @@
-.login-html .sign-up:checked + .tab{
-	color:#fff;
-	border-color:#630f09;
-}
